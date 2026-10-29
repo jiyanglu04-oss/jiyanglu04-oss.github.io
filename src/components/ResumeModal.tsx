@@ -5,7 +5,7 @@ import { Download, X } from 'lucide-react';
 const BASE = import.meta.env.BASE_URL;
 
 /** 换简历时把这个版本号一起改掉，否则访客浏览器会继续用缓存里的旧图 */
-const RESUME_VERSION = '2026-10-30';
+const RESUME_VERSION = '2026-10-30b';
 
 /**
  * 简历弹层：点「查看简历」直接在本页看，不跳新标签页。
