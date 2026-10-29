@@ -84,7 +84,7 @@ const chapters = [
     english: 'EDITING WORKS',
     title: '影像剪辑与动态叙事',
     description: '口播、混剪与宣传片，从脚本、拍摄到成片都在自己手里完成。',
-    note: '本地视频 · 站内播放',
+    note: '云端存储 · 站内播放',
     count: 13,
     unit: '支视频',
     icon: Clapperboard,

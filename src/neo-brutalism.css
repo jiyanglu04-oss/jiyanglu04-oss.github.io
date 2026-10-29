@@ -4238,6 +4238,14 @@ video {
   backface-visibility: hidden;
 }
 
+/* 正面必须显式参与 3D：只在父级 preserve-3d 里躺着时，Chrome 不会应用
+   backface-visibility:hidden，翻过去的书页正面会透出来、和背面叠在一起
+   （表现为左页出现倒置的照片 / 视频框压住标题）。translateZ(0) 是最小代价的
+   触发方式，视觉上没有位移；背面本来就有 rotateY(180deg)，不受影响。 */
+.folio-face--front {
+  transform: translateZ(0);
+}
+
 .folio-face--back {
   transform: rotateY(180deg);
 }
