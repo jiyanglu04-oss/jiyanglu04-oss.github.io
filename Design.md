@@ -763,11 +763,14 @@ item.fill.color.copy(LIME).lerp(YELLOW, item.active);       // 变柠檬黄
 - 跨页跳转（点书签）要给每片叶子写 `transition-delay`，`120ms` 递增 —— 才会「一页一页翻过去」而不是整叠一起转
 - 书脊阴影写在 `.folio-face::before`：右页压左边、左页压右边；**背面已绕 180°，所以阴影要放 right**
 
-**三个必须记住的坑**
+**四个必须记住的坑**
 
-1. **翻页手势不能起手在 `<video>` 上**：原生控件会吞掉 pointerdown/up，拖动进度条会被误判成翻页。守卫只排除 `video, input, button`，**不能排除 `<a>`** —— 作品页几乎全是链接，排掉就等于滑动不可用。
-2. **必须拦原生拖拽**：`.folio-stage` 上加 `onDragStart={preventDefault}` + `user-select: none` + `img { -webkit-user-drag: none }`。否则在链接/图片上拖一下会触发 HTML5 drag，浏览器随即打断指针事件抛一串 `pointerleave`，滑动直接失效（这个坑排查了一轮）。
-3. **滑动之后的那次 click 要吞掉**：`onClickCapture` 里检查 `gestureRef.swiped`，命中就 `preventDefault + stopPropagation`，否则拖完手一松会顺手打开某个作品链接。
+1. **正面必须给自己一个 3D 变换**：叶片只靠父级 `preserve-3d` 躺着时，Chrome **不会**对 `.folio-face--front` 应用 `backface-visibility: hidden`，翻过去的正面会透出来，和背面叠在一起 —— 现象是左页出现**倒置的照片 / 视频框压住章节标题**。给正面加 `transform: translateZ(0)`（视觉无位移）即可；背面本来就有 `rotateY(180deg)`，天然参与 3D，所以只有正面出问题。
+2. **翻页手势不能起手在 `<video>` 上**：原生控件会吞掉 pointerdown/up，拖动进度条会被误判成翻页。守卫只排除 `video, input, button`，**不能排除 `<a>`** —— 作品页几乎全是链接，排掉就等于滑动不可用。
+3. **必须拦原生拖拽**：`.folio-stage` 上加 `onDragStart={preventDefault}` + `user-select: none` + `img { -webkit-user-drag: none }`。否则在链接/图片上拖一下会触发 HTML5 drag，浏览器随即打断指针事件抛一串 `pointerleave`，滑动直接失效（这个坑排查了一轮）。
+4. **滑动之后的那次 click 要吞掉**：`onClickCapture` 里检查 `gestureRef.swiped`，命中就 `preventDefault + stopPropagation`，否则拖完手一松会顺手打开某个作品链接。
+
+**验证方法（别靠肉眼）**：翻到每一跨页，用 `document.elementFromPoint(左页中心点)` 看命中的是哪个 `.folio-face` —— 左页必须是 `--back`、右页必须是 `--front`；命中 `--front` 就是又漏了第 1 条。
 
 ### 13.11 为什么不是每页都上 WebGL
 
