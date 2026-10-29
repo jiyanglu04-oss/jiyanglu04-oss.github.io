@@ -5535,3 +5535,182 @@ body.case-modal-open {
     animation: none;
   }
 }
+
+/* ============================================================
+   简历弹层（About「查看简历」）—— 直接在页面里看，不跳第三方
+   ============================================================ */
+
+.resume-backdrop {
+  z-index: 95;
+}
+
+.resume-sheet {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 880px);
+  max-height: 92vh;
+  overflow: hidden;
+  border: var(--nb-stroke);
+  border-radius: var(--nb-radius-lg);
+  background: var(--nb-paper-2);
+  box-shadow: 12px 12px 0 var(--nb-ink);
+  animation: case-rise 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.resume-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px clamp(16px, 2vw, 26px);
+  border-bottom: var(--nb-stroke-thin);
+  background: var(--nb-paper-2);
+}
+
+.resume-bar-title p {
+  margin: 0 0 2px;
+  font-family: var(--nb-font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--nb-muted);
+}
+
+.resume-bar-title h2 {
+  margin: 0;
+  font-size: clamp(15px, 1.7vw, 19px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.resume-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.resume-bar-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 15px;
+  border: var(--nb-stroke-thin);
+  border-radius: var(--nb-pill);
+  background: var(--nb-lime);
+  color: var(--nb-ink);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: var(--nb-shadow-sm);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.resume-bar-actions a:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--nb-ink);
+}
+
+.resume-bar-actions a svg {
+  width: 15px;
+  height: 15px;
+}
+
+.resume-close {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: var(--nb-stroke-thin);
+  border-radius: var(--nb-pill);
+  background: var(--nb-paper-2);
+  color: var(--nb-ink);
+  box-shadow: var(--nb-shadow-sm);
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.resume-close:hover {
+  background: var(--nb-ink);
+  color: var(--nb-paper-2);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--nb-ink);
+}
+
+.resume-close svg {
+  width: 19px;
+  height: 19px;
+}
+
+/* 纸面底色比弹层暗一档，让简历像一张摊在桌上的纸 */
+.resume-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(12px, 1.8vw, 24px);
+  display: grid;
+  justify-items: center;
+  background: #e9e7df;
+  scrollbar-width: thin;
+}
+
+.resume-scroll img {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  border: var(--nb-stroke-thin);
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(10, 10, 10, 0.16);
+}
+
+@media (max-width: 620px) {
+  .resume-sheet {
+    max-height: 94vh;
+    border-radius: 16px;
+    box-shadow: 8px 8px 0 var(--nb-ink);
+  }
+
+  .resume-bar {
+    padding: 10px 14px;
+  }
+
+  /* 窄屏只留图标，别让按钮把标题挤没 */
+  .resume-bar-actions a {
+    padding: 9px 11px;
+    font-size: 0;
+    gap: 0;
+  }
+
+  .resume-bar-actions a svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+/* 手机上简历字小，给一句双指放大提示，桌面端不显示 */
+.resume-hint {
+  display: none;
+  margin: 3px 0 0;
+  font-size: 11px;
+  color: var(--nb-muted);
+}
+
+@media (max-width: 620px) {
+  .resume-hint {
+    display: block;
+  }
+}
+
+/* 手机上简历字小，给一句双指放大提示，桌面端不显示 */
+.resume-hint {
+  display: none;
+  margin: 3px 0 0;
+  font-size: 11px;
+  color: var(--nb-muted);
+}
+
+@media (max-width: 620px) {
+  .resume-hint {
+    display: block;
+  }
+}

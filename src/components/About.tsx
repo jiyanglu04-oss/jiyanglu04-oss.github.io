@@ -1,7 +1,8 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { ArrowDownToLine, ArrowUpRight, Mail, MapPin } from 'lucide-react';
 import { personalInfo } from '../data';
 import AboutBadge from './AboutBadge';
+import ResumeModal from './ResumeModal';
 
 interface AboutProps {
   onContactMe: () => void;
@@ -9,6 +10,7 @@ interface AboutProps {
 
 export default function About({ onContactMe }: AboutProps) {
   const badgeFocus = useRef<number | null>(null);
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   return (
     <section id="about" className="editorial-about">
@@ -60,13 +62,15 @@ export default function About({ onContactMe }: AboutProps) {
           </div>
 
           <div className="about-actions">
-            {/* ?v= 换简历时改一下版本号，避免访客浏览器继续命中旧缓存 */}
-            <a href={`${import.meta.env.BASE_URL}resume.pdf?v=2026-10b`} target="_blank" rel="noopener noreferrer">查看简历 <ArrowDownToLine /></a>
+            {/* 站内弹层看简历，不跳新标签；PDF 原文件在弹层里可下载 */}
+            <button type="button" onClick={() => setResumeOpen(true)}>查看简历 <ArrowDownToLine /></button>
             <button type="button" onClick={onContactMe}>邮箱联系 <Mail /></button>
             <button onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}>继续了解 <ArrowUpRight /></button>
           </div>
         </div>
       </div>
+
+      {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
     </section>
   );
 }

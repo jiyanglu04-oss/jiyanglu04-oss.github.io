@@ -19,6 +19,12 @@ export default function ProjectModal({ project, onClose }: Props) {
   const sheetRef = useRef<HTMLElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const study = project.caseStudy;
+  const label = {
+    background: study?.labels?.background ?? '开发背景',
+    stack: study?.labels?.stack ?? '技术栈',
+    features: study?.labels?.features ?? '界面一览',
+    highlights: study?.labels?.highlights ?? '工程上做了什么',
+  };
 
   useEffect(() => {
     const previousFocus = document.activeElement as HTMLElement | null;
@@ -109,14 +115,14 @@ export default function ProjectModal({ project, onClose }: Props) {
         </dl>
 
         <section className="case-block">
-          <h3><i>01</i>开发背景</h3>
+          <h3><i>01</i>{label.background}</h3>
           <div className="case-prose">
             {study.background.map((paragraph) => <p key={paragraph.slice(0, 12)}>{paragraph}</p>)}
           </div>
         </section>
 
         <section className="case-block">
-          <h3><i>02</i>技术栈</h3>
+          <h3><i>02</i>{label.stack}</h3>
           <div className="case-stack">
             {study.techStack.map((group) => (
               <div key={group.group} className="case-stack-group">
@@ -130,7 +136,7 @@ export default function ProjectModal({ project, onClose }: Props) {
         </section>
 
         <section className="case-block">
-          <h3><i>03</i>界面一览</h3>
+          <h3><i>03</i>{label.features}</h3>
           <div className="case-shots">
             {gallery.map((item) => (
               <figure key={item.title} className={`case-shot${item.wide ? ' is-wide' : ''}`}>
@@ -147,7 +153,7 @@ export default function ProjectModal({ project, onClose }: Props) {
         </section>
 
         <section className="case-block">
-          <h3><i>04</i>工程上做了什么</h3>
+          <h3><i>04</i>{label.highlights}</h3>
           <ul className="case-highlights">
             {study.highlights.map((item) => (
               <li key={item.title}>

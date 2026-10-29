@@ -16,6 +16,16 @@ export interface ProjectCase {
   highlights: { title: string; desc: string }[];
   /** 需要在界面上如实说明的边界 */
   note?: string;
+  /**
+   * 章节标题可改：自媒体 / 调研类项目叫「技术栈」「工程上做了什么」很别扭，
+   * 不给就用默认值（开发背景 / 技术栈 / 界面一览 / 工程上做了什么）。
+   */
+  labels?: {
+    background?: string;
+    stack?: string;
+    features?: string;
+    highlights?: string;
+  };
 }
 
 export interface Project {
