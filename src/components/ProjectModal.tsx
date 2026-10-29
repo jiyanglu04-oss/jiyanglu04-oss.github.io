@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { X } from 'lucide-react';
+import { ArrowUpRight, X } from 'lucide-react';
 import type { Project } from '../types';
 
 const BASE = import.meta.env.BASE_URL;
@@ -63,6 +63,15 @@ export default function ProjectModal({ project, onClose }: Props) {
   if (!study) return null;
 
   const hero = study.features.find((item) => item.shot);
+  // 有互动数据的按数据降序，没有就保持作者给的顺序
+  const toNum = (v?: string) => {
+    if (!v) return -1;
+    const n = parseFloat(v.replace(/[^\d.]/g, ''));
+    if (!Number.isFinite(n)) return -1;
+    if (/w|万/i.test(v)) return n * 10000;
+    return n;
+  };
+  const notes = study.notes ? [...study.notes].sort((a, b) => toNum(b.likes) - toNum(a.likes)) : undefined;
   const gallery = study.features.filter((item) => item !== hero);
 
   return createPortal(
@@ -82,6 +91,12 @@ export default function ProjectModal({ project, onClose }: Props) {
         <button ref={closeRef} type="button" className="case-close" onClick={onClose} aria-label="关闭项目详情">
           <X aria-hidden="true" />
         </button>
+
+        {study.link && (
+          <a className="case-link" href={study.link.url} target="_blank" rel="noopener noreferrer">
+            {study.link.label} <ArrowUpRight aria-hidden="true" />
+          </a>
+        )}
 
         <header className="case-head">
           <p className="case-kicker">
@@ -139,9 +154,10 @@ export default function ProjectModal({ project, onClose }: Props) {
           <h3><i>03</i>{label.features}</h3>
           {study.notes && (
             <ul className="case-notes">
-              {study.notes.map((note) => (
+              {notes?.map((note) => (
                 <li key={note.title}>
                   <span className="case-note-kind">{note.kind}</span>
+                  {note.likes && <span className="case-note-likes">♥ {note.likes}</span>}
                   <b>{note.title}</b>
                   <p>{note.desc}</p>
                 </li>

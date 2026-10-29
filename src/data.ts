@@ -257,6 +257,7 @@ export const projects: Project[] = [
       tagline: '一个不到两百粉的账号，靠「能照着做」的机位与调色教程，把 60+ 篇图文推到了 150w+ 曝光。',
       badge: 'SELF-MEDIA',
       heroFit: 'card',
+      link: { label: '打开小红书主页', url: 'https://xhslink.cn/o/9arcmOTNjHL' },
       gallery: 'trio',
       labels: {
         background: '账号起点',
