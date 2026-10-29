@@ -4,6 +4,9 @@ import { Download, X } from 'lucide-react';
 
 const BASE = import.meta.env.BASE_URL;
 
+/** 换简历时把这个版本号一起改掉，否则访客浏览器会继续用缓存里的旧图 */
+const RESUME_VERSION = '2026-10-30';
+
 /**
  * 简历弹层：点「查看简历」直接在本页看，不跳新标签页。
  *
@@ -67,7 +70,7 @@ export default function ResumeModal({ onClose }: { onClose: () => void }) {
             <p className="resume-hint">手机可双指放大查看</p>
           </div>
           <div className="resume-bar-actions">
-            <a href={`${BASE}resume.pdf`} download="陆机阳-简历.pdf">
+            <a href={`${BASE}resume.pdf?v=${RESUME_VERSION}`} download="陆机阳-简历.pdf">
               下载 PDF <Download aria-hidden="true" />
             </a>
             <button ref={closeRef} type="button" className="resume-close" onClick={onClose} aria-label="关闭简历">
@@ -77,7 +80,7 @@ export default function ResumeModal({ onClose }: { onClose: () => void }) {
         </header>
 
         <div className="resume-scroll">
-          <img src={`${BASE}resume-page-1.webp`} alt="陆机阳的简历，单页 A4" decoding="async" />
+          <img src={`${BASE}resume-page-1.webp?v=${RESUME_VERSION}`} alt="陆机阳的简历，单页 A4" decoding="async" />
         </div>
       </div>
     </div>,
