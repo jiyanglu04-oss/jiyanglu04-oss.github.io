@@ -313,6 +313,13 @@ Footer      墨黑底
 - **结构固定四节**：`01 开发背景` → `02 技术栈` → `03 界面一览` → `04 工程上做了什么`；节标题前是荧光绿小方牌
 - **节标题可由数据改**：`caseStudy.labels = { background, stack, features, highlights }`。
   自媒体、调研类的项目叫「技术栈」「工程上做了什么」很别扭 —— 小红书那篇改成「内容与运营方法」「做对了什么」
+- **截图类主视觉限宽**：`caseStudy.heroFit = 'card'` → 最大 620px 居中，最高 470px。
+  手机/主页截图整宽铺开要吃掉一整屏，限宽后才像「桌上放了一张卡片」
+- **内容清单**：`caseStudy.notes = [{ kind, title, desc }]` → 2 列卡片（手机单列），
+  放真实发过的笔记标题。比摆几张随机照片更有信息量
+- **图片等宽**：`caseStudy.gallery = 'trio'` → 三列 4:5 竖图 `object-fit: cover`。
+  两列原比例时，竖图 578 / 771 / 578 高度参差，行与行之间全是洞
+- 案例页图片必须用 ≥2 倍显示宽度的源图：`photography-*.thumb.webp` 只有 330px，铺到 435px 就发虚
 - **头部**：`CASE STUDY` 等宽大字 + `VIBE CODING` 墨黑胶囊 → 标题 → 一句话定位 → 角色 / 时间 / 关键词胶囊
 - **主视觉**：取第一条带图的 feature 当 hero（占满整宽、3px 黑边 + 硬阴影），其余图进「界面一览」两列网格
 - **图片整宽由数据决定**：`features[].wide = true` → `.case-shot.is-wide { grid-column: span 2 }`。
