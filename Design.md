@@ -272,6 +272,11 @@ Footer      墨黑底
 左：`data-reveal` 身份卡（白底 + 3px 黑边 + 硬阴影 + `-1.5deg` 倾斜，卡片上沿挂一条黑色工牌挂绳）
 右：kicker `ABOUT ME` → H2（后半句加荧光绿高亮）→ 小标题 → 长简介 → 两栏事实区（用 3px 黑线分隔，不用细灰线）→ 三个胶囊操作按钮
 
+**「查看简历」不跳新标签页**：点开是站内弹层（`ResumeModal`），把 `resume.pdf` 第一页预渲染成 `resume-page-1.webp`（PyMuPDF 2 倍图，1190×1684）铺在弹层里，可滚动、可关闭；右上角才给「下载 PDF」。
+- **不要用 `<iframe src="resume.pdf">`**：iOS Safari 的 iframe 只画第一页、部分安卓浏览器直接触发下载；图片在任何设备都按宽度铺满
+- 换简历时：替换 `public/resume.pdf` → 重新渲染 `resume-page-1.webp`（`pymupdf` + PIL 转 WebP）
+- 手机上字小，标题下给一行「手机可双指放大查看」（`≤620px` 才显示）
+
 ### 06.5 Experience（经历）
 
 - 顶部居中：kicker + H2 + 底部 3px 黑线
@@ -306,6 +311,8 @@ Footer      墨黑底
 项目转盘右下角的圆形按钮，对有 `caseStudy` 的项目改成**打开案例页**（其余项目仍是外链）。案例页是 `createPortal` 到 body 的长页弹层，内容全部来自 `data.ts`，改文案不用动组件。
 
 - **结构固定四节**：`01 开发背景` → `02 技术栈` → `03 界面一览` → `04 工程上做了什么`；节标题前是荧光绿小方牌
+- **节标题可由数据改**：`caseStudy.labels = { background, stack, features, highlights }`。
+  自媒体、调研类的项目叫「技术栈」「工程上做了什么」很别扭 —— 小红书那篇改成「内容与运营方法」「做对了什么」
 - **头部**：`CASE STUDY` 等宽大字 + `VIBE CODING` 墨黑胶囊 → 标题 → 一句话定位 → 角色 / 时间 / 关键词胶囊
 - **主视觉**：取第一条带图的 feature 当 hero（占满整宽、3px 黑边 + 硬阴影），其余图进「界面一览」两列网格
 - **图片整宽由数据决定**：`features[].wide = true` → `.case-shot.is-wide { grid-column: span 2 }`。
