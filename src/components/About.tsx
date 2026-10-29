@@ -61,7 +61,7 @@ export default function About({ onContactMe }: AboutProps) {
 
           <div className="about-actions">
             {/* ?v= 换简历时改一下版本号，避免访客浏览器继续命中旧缓存 */}
-            <a href={`${import.meta.env.BASE_URL}resume.pdf?v=2026-10`} target="_blank" rel="noopener noreferrer">查看简历 <ArrowDownToLine /></a>
+            <a href={`${import.meta.env.BASE_URL}resume.pdf?v=2026-10b`} target="_blank" rel="noopener noreferrer">查看简历 <ArrowDownToLine /></a>
             <button type="button" onClick={onContactMe}>邮箱联系 <Mail /></button>
             <button onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}>继续了解 <ArrowUpRight /></button>
           </div>
