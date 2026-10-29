@@ -5714,3 +5714,87 @@ body.case-modal-open {
     display: block;
   }
 }
+
+/* ---- 案例页：截图类主视觉按「卡片」看 ---- */
+/* 手机/主页截图整宽铺开要占掉一整屏，限宽居中更像桌上放了一张卡片 */
+.case-hero.is-card {
+  max-width: 620px;
+  margin: 26px auto 0;
+  background: var(--nb-paper-3);
+}
+
+.case-hero.is-card img {
+  max-height: 470px;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* ---- 案例页：内容选题清单（真实笔记标题） ---- */
+.case-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+}
+
+.case-notes li {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  border: var(--nb-stroke-thin);
+  border-radius: var(--nb-radius-sm);
+  background: var(--nb-paper);
+}
+
+.case-note-kind {
+  align-self: flex-start;
+  padding: 3px 9px;
+  border: 2px solid var(--nb-ink);
+  border-radius: var(--nb-pill);
+  background: var(--nb-lime);
+  font-family: var(--nb-font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.case-notes b {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.case-notes p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--nb-muted);
+}
+
+/* ---- 案例页：三列等宽竖图（比两列原比例更齐） ---- */
+.case-shots.is-trio {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.case-shots.is-trio .case-shot img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+@media (max-width: 760px) {
+  .case-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .case-shots.is-trio {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .case-hero.is-card img {
+    max-height: 380px;
+  }
+}

@@ -100,7 +100,7 @@ export default function ProjectModal({ project, onClose }: Props) {
         </header>
 
         {hero?.shot && (
-          <figure className="case-hero">
+          <figure className={`case-hero${study.heroFit === 'card' ? ' is-card' : ''}`}>
             <img src={`${BASE}${hero.shot}`} alt={`${project.title}界面截图`} loading="lazy" decoding="async" />
           </figure>
         )}
@@ -137,7 +137,19 @@ export default function ProjectModal({ project, onClose }: Props) {
 
         <section className="case-block">
           <h3><i>03</i>{label.features}</h3>
-          <div className="case-shots">
+          {study.notes && (
+            <ul className="case-notes">
+              {study.notes.map((note) => (
+                <li key={note.title}>
+                  <span className="case-note-kind">{note.kind}</span>
+                  <b>{note.title}</b>
+                  <p>{note.desc}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <div className={`case-shots${study.gallery === 'trio' ? ' is-trio' : ''}`}>
             {gallery.map((item) => (
               <figure key={item.title} className={`case-shot${item.wide ? ' is-wide' : ''}`}>
                 {item.shot && (

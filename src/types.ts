@@ -10,6 +10,12 @@ export interface ProjectCase {
   techStack: { group: string; items: string[] }[];
   /** 顶部关键数字 */
   stats: { value: string; label: string }[];
+  /** 主视觉的呈现方式：card = 限宽居中当卡片看（适合截图类），默认满宽 */
+  heroFit?: 'card';
+  /** 内容选题清单：真实发过的笔记标题，2 列卡片渲染在 03 里 */
+  notes?: { title: string; kind: string; desc: string }[];
+  /** 界面一览的排布：trio = 三列等宽竖图（默认两列原比例） */
+  gallery?: 'trio';
   /** 功能鸟瞰：一条一个要点，可带截图；wide = 图里是文字表格，需要整宽才看得清 */
   features: { title: string; desc: string; shot?: string; wide?: boolean }[];
   /** 工程亮点 */
