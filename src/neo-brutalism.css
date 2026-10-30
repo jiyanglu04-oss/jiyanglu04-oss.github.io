@@ -5739,13 +5739,12 @@ body.case-modal-open {
   list-style: none;
 }
 
+/* 用 flex 换行而不是 grid：grid 的 max-content 列会被长标题撑宽，文字直接溢出卡片 */
 .case-notes li {
-  display: grid;
-  grid-template-columns: max-content max-content;
-  justify-content: start;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  column-gap: 8px;
-  row-gap: 6px;
+  gap: 6px 8px;
   padding: 14px 16px;
   border: var(--nb-stroke-thin);
   border-radius: var(--nb-radius-sm);
@@ -5755,7 +5754,8 @@ body.case-modal-open {
 /* 标题和说明各占一整行，两个标签留在同一行 */
 .case-notes b,
 .case-notes p {
-  grid-column: 1 / -1;
+  flex: 0 0 100%;
+  min-width: 0;
 }
 
 .case-note-kind {
