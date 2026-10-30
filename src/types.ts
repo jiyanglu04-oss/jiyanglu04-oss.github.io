@@ -13,7 +13,7 @@ export interface ProjectCase {
   /** 主视觉的呈现方式：card = 限宽居中当卡片看（适合截图类），默认满宽 */
   heroFit?: 'card';
   /** 内容选题清单：真实发过的笔记标题，2 列卡片渲染在 03 里 */
-  notes?: { title: string; kind: string; desc: string; likes?: string }[];
+  notes?: { title: string; kind: string; desc: string; likes?: string; views?: string }[];
   /** 案例页右上角的直达按钮（如「打开小红书主页」） */
   link?: { label: string; url: string };
   /** 界面一览的排布：trio = 三列等宽竖图（默认两列原比例） */

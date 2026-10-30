@@ -71,7 +71,8 @@ export default function ProjectModal({ project, onClose }: Props) {
     if (/w|万/i.test(v)) return n * 10000;
     return n;
   };
-  const notes = study.notes ? [...study.notes].sort((a, b) => toNum(b.likes) - toNum(a.likes)) : undefined;
+  const score = (n: { likes?: string; views?: string }) => Math.max(toNum(n.likes), toNum(n.views));
+  const notes = study.notes ? [...study.notes].sort((a, b) => score(b) - score(a)) : undefined;
   const gallery = study.features.filter((item) => item !== hero);
 
   return createPortal(
@@ -157,7 +158,11 @@ export default function ProjectModal({ project, onClose }: Props) {
               {notes?.map((note) => (
                 <li key={note.title}>
                   <span className="case-note-kind">{note.kind}</span>
-                  {note.likes && <span className="case-note-likes">♥ {note.likes}</span>}
+                  {(note.views || note.likes) && (
+                    <span className="case-note-likes">
+                      {note.views ? `浏览 ${note.views}` : `赞 ${note.likes}`}
+                    </span>
+                  )}
                   <b>{note.title}</b>
                   <p>{note.desc}</p>
                 </li>
