@@ -12,7 +12,7 @@ const categories = [
 
 const coverFor = (project: Project) => ({
   'Vibe Coding': 'xueban/cover.webp',
-  AI智能: 'yaoshan-cover.webp', 竞技: 'zhengda-cover.webp', 创业: 'shopee-store.webp', 新媒体: 'xhs-profile.webp',
+  AI智能: 'yaoshan-cover.webp', 竞技: 'zhengda-cover.webp', 创业: 'shopee-store.webp', 新媒体: 'xhs-profile-2026-10.webp',
 }[project.category] || 'avatar.webp');
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
